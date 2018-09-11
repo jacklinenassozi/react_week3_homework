@@ -15,7 +15,10 @@ function TodoItem(props) {
                 checked={props.done}
                 />
                 <span className={todoTextClass}>{props.text}</span> 
-            <button>remove</button>
+            <button  onClick={()=>{
+                props.removeTodo(props.id)
+            }}>remove</button>
+            
         </li>
     )
 }

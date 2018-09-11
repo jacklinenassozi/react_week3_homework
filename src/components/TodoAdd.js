@@ -3,8 +3,10 @@ import React from 'react';
 function TodoAdd(props){
   //const inputValue=''
 
-    return (<div className= 'todo-add'>
-     <input 
+    return (
+      
+      <div className= 'todo-add'>
+      <input 
       type = 'text' 
        onChange = {e => {
            const input = e.target
