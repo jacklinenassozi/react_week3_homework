@@ -1,100 +1,85 @@
-import React from 'react';
-import TodoAdd from './TodoAdd';
-import TodoList from './TodoList';
+import React from "react";
+import TodoAdd from "./TodoAdd";
+import TodoList from "./TodoList";
 
 class TodoApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: '',
-            items: [
-                {
-                    "id": 1,
-                    "description": "Get out of bed",
-                    "done": true
-                }, {
-                    "id": 2,
-                    "description": "Brush teeth",
-                    "done": false
-                }, {
-                    "id": 3,
-                    "description": "Eat breakfast",
-                    "done": false
-                }
-            ]
-        };
-        this.changeValue = this
-            .changeValue
-            .bind(this)
-        this.addTodo = this
-            .addTodo
-            .bind(this)
-        this.changeStatus = this
-            .changeStatus
-            .bind(this)
-        this.removeTodo = this
-            .removeTodo
-            .bind(this)
-
-    }
-
-    changeValue(newInputValue) {
-        //console.log(value)
-        this.setState({value: newInputValue})
-    }
-
-    addTodo() {
-        // console.log('adding to  do')
-        const newItem = {
-            id: ++this.id,
-            description: this.state.value,
-            done: false
-        };
-        const Items = this.state.items
-        const newItems = Items.push(newItem)
-        this.setState({items: Items, value: ''})
-        //items.push(newItem) console.log(newItem)
-    }
-    removeTodo(id) {
-        const todos = this.state.todos
-        const newTodos = todos.findIndex(x => x.id ===id);
-        todos.splice(newTodos, 1);
-        this.setState(todos)
-    }
-
-    changeStatus(todoId) {
-        //console.log(`todo ${todoId}changed`)
-        const newItems = this
-            .state
-            .items
-            .map((todo) => {
-                if (todo.id !== todoId) 
-                    return todo;
-                else {
-                    todo.done = !todo;
-                    return todo;
-                }
-            })
-        this.setState = {
-            items: newItems
+  constructor(props) {
+    super(props);
+    this.id = 3;
+    this.state = {
+      value: "",
+      items: [
+        {
+          id: 1,
+          description: "Get out of bed",
+          done: true
+        },
+        {
+          id: 2,
+          description: "Brush teeth",
+          done: false
+        },
+        {
+          id: 3,
+          description: "Eat breakfast",
+          done: false
         }
-    }
+      ]
+    };
+    this.changeValue = this.changeValue.bind(this);
+    this.addTodo = this.addTodo.bind(this);
+    this.changeStatus = this.changeStatus.bind(this);
+    this.removeTodo = this.removeTodo.bind(this)
+  }
 
-    
-    render() {
-        return (
-            <div className='changeValue_app'>
-                <TodoAdd
-                    value={this.state.value}
-                    onButtonClick={this.addTodo}
-                    onChange={this.changeValue}/>
-                <TodoList 
-                changeStatus={this.changeStatus}
-                removeTodo={this.removeTodo} 
-                items={this.state.items}/>
+  changeValue(newInputValue) {
+    this.setState({ value: newInputValue });
+  }
 
-            </div>
-        )
-    }
+  addTodo() {
+    const newItem = {
+      id: ++this.id,
+      description: this.state.value,
+      done: false
+    };
+    const items = this.state.items;
+    items.push(newItem);
+    this.setState({ items, value: "" });
+  }
+
+  removeTodo(id) {
+    const todos = this.state.todos
+    const newTodos = todos.findIndex(x => x.id ===id);
+    todos.splice(newTodos, 1);
+    this.setState(todos)
 }
+
+  changeStatus(todoId) {
+    // console.log(`todo ${todoId} changed`);
+    const newItems = this.state.items.map(todo => {
+      if (todo.id === todoId) {
+        /*         if (todo.done === true) todo.done = false;
+        else todo.done = true; */
+        todo.done = !todo.done;
+        return todo;
+      } else return todo;
+    });
+
+    this.setState({ items: newItems });
+  }
+
+  render() {
+    return (
+      <div className="todo-app">
+        <TodoAdd
+          value={this.state.value}
+          onButtonClick={this.addTodo}
+          onChange={this.changeValue}
+        />
+        <TodoList changeStatus={this.changeStatus} items={this.state.items} removeTodo={this.removeTodo}/>
+      </div>
+    );
+  }
+}
+
 export default TodoApp;
