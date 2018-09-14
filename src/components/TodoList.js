@@ -13,6 +13,7 @@ function TodoList(props) {
               id={todo.id}
               text={todo.description}
               done={todo.done}
+              removeTodo={props.removeTodo}
             />
           ))}
     </ul>
