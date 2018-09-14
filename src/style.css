@@ -1,3 +1,5 @@
-.item-done{
-text-decoration: line-through;
+.item-done {
+  text-decoration: line-through;
+  transition: 1s all;
+  background: red;
 }
