@@ -48,10 +48,24 @@ class TodoApp extends React.Component {
   }
 
   removeTodo(id) {
-    const todos = this.state.todos
+      console.log(id +'deleted')
+
+    /* const todos = this.state.todos
     const newTodos = todos.findIndex(x => x.id ===id);
     todos.splice(newTodos, 1);
-    this.setState(todos)
+    this.setState(todos) */
+    const newItems = this.state.items.map(todo => {
+        if (todo.id === id) {
+          const index = this.state.items.findIndex(todos => todos === todo);
+
+          console.log(index)
+          let remainedItems = this.state.items.slice(index);
+          return remainedItems;
+        } else return todo;
+      });
+  
+      this.setState({ items: newItems });
+
 }
 
   changeStatus(todoId) {
